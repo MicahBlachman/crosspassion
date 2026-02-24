@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crosspassion</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="bg-orb bg-orb-a" aria-hidden="true"></div>
+    <div class="bg-orb bg-orb-b" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <div class="brand">
+        <p class="brand-mark">crosspassion</p>
+        <h1>Find your two-interest people</h1>
+      </div>
+      <div class="sort-tabs" role="tablist" aria-label="Sort feed">
+        <button class="tab active" data-sort="hot">Hot</button>
+        <button class="tab" data-sort="new">New</button>
+        <button class="tab" data-sort="top">Top</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="panel left-panel">
+        <section class="card">
+          <h2>Your profile</h2>
+          <form id="profileForm" class="stack">
+            <label>
+              Display name
+              <input id="displayName" name="displayName" maxlength="40" placeholder="Name" />
+            </label>
+            <button type="submit" class="btn">Save profile</button>
+          </form>
+        </section>
+
+        <section class="card">
+          <h2>Your interests</h2>
+          <form id="interestForm" class="inline-form">
+            <input id="interestInput" maxlength="48" placeholder="Add interest" />
+            <button type="submit" class="btn">Add</button>
+          </form>
+          <div id="myInterests" class="chip-wrap"></div>
+        </section>
+
+        <section class="card">
+          <h2>Intersection communities</h2>
+          <div id="communityList" class="community-list"></div>
+        </section>
+      </aside>
+
+      <section class="panel center-panel">
+        <section class="card compose">
+          <h2>Create a post</h2>
+          <form id="postForm" class="stack">
+            <label>
+              Title
+              <input id="postTitle" maxlength="160" required placeholder="Ask or share something crosspassionate" />
+            </label>
+            <label>
+              Body
+              <textarea id="postBody" rows="4" maxlength="5000" required placeholder="What happened? Why is this interesting at the intersection?"></textarea>
+            </label>
+            <div class="interest-grid">
+              <label>
+                First interest
+                <select id="firstInterest" required></select>
+              </label>
+              <label>
+                Second interest
+                <select id="secondInterest" required></select>
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Post to intersection</button>
+          </form>
+        </section>
+
+        <section id="feedHeader" class="feed-header"></section>
+        <section id="feed" class="feed"></section>
+      </section>
+
+      <aside class="panel right-panel">
+        <section class="card">
+          <h2>Crosspassion map</h2>
+          <p class="muted">Generated from your interests. Existing communities appear first.</p>
+          <div id="suggestionList" class="suggestion-list"></div>
+        </section>
+      </aside>
+    </main>
+
+    <template id="postTemplate">
+      <article class="card post-card">
+        <div class="post-meta-row">
+          <button class="community-pill" data-open-community></button>
+          <span class="post-age" data-age></span>
+        </div>
+        <h3 data-title></h3>
+        <p data-body></p>
+
+        <div class="vote-row">
+          <div class="vote-controls">
+            <button class="icon-btn" title="Upvote" data-vote-up>^</button>
+            <span class="score" data-score></span>
+            <button class="icon-btn" title="Downvote" data-vote-down>v</button>
+          </div>
+          <button class="link-btn" data-toggle-comments>Comments</button>
+        </div>
+
+        <section class="comments hidden" data-comments-wrap>
+          <div class="comment-list" data-comment-list></div>
+          <form class="comment-form" data-comment-form>
+            <div class="reply-banner hidden" data-reply-banner></div>
+            <input type="hidden" name="parentCommentId" value="" />
+            <textarea name="body" rows="2" maxlength="2000" required placeholder="Join the thread"></textarea>
+            <div class="comment-actions">
+              <button type="submit" class="btn">Reply</button>
+              <button type="button" class="btn ghost hidden" data-cancel-reply>Cancel reply</button>
+            </div>
+          </form>
+        </section>
+      </article>
+    </template>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
